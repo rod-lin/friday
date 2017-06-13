@@ -1,0 +1,92 @@
+body {
+	font-family: Veneer;
+	line-height: 1;
+	color: rgba(20, 20, 20, 1);
+
+	background: rgba(253, 253, 253, 1);
+
+	transition: background 0.3s;
+}
+
+body.dark {
+	background: rgba(30, 30, 30, 1);
+}
+
+h1 {
+	font-size: 2.5em;
+}
+
+.bigger {
+	font-size: 120%;
+}
+
+.smaller {
+	font-size: 90%;
+}
+
+.code {
+	font-family: Consolas;
+}
+
+.step {}
+
+.step.centered {
+	text-align: center;
+}
+
+.step.wide {
+	width: 80vw;
+}
+
+.step.full {
+	width: 100vw;
+}
+
+.img {
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.blue {
+	color: #3498DB;
+}
+
+.deep.blue {
+	color: #2980B9;
+}
+
+.orange {
+	color: #E67E22;
+}
+
+.red {
+	color: #E74C3C;
+}
+
+.green {
+	color: #2ECC71;
+}
+
+.term {
+	display: inline-block;
+	font-size: 2.3rem;
+	width: 90%;
+	height: 80vh;
+}
+
+.term .terminal{
+	background: none;
+}
+
+.term .terminal .xterm-rows {
+	font-family: Consolas;
+}
+
+.term .terminal .xterm-rows>div {
+	padding: 0;
+}
+
+.term .terminal .xterm-viewport {
+	overflow-y: hidden !important;
+	background: none;
+}
