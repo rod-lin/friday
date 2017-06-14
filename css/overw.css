@@ -3,13 +3,9 @@ body {
 	line-height: 1;
 	color: rgba(20, 20, 20, 1);
 
-	background: rgba(253, 253, 253, 1);
-
-	transition: background 0.3s;
-}
-
-body.dark {
 	background: rgba(30, 30, 30, 1);
+
+	perspective: 1000px;
 }
 
 h1 {
@@ -69,8 +65,7 @@ h1 {
 
 .term {
 	display: inline-block;
-	font-size: 2.3rem;
-	width: 90%;
+	font-size: 2rem;
 	height: 80vh;
 }
 
@@ -89,4 +84,32 @@ h1 {
 .term .terminal .xterm-viewport {
 	overflow-y: hidden !important;
 	background: none;
+}
+
+.main-view {
+	position: relative;
+	width: 100%;
+	height: 100%;
+
+	overflow: hidden;
+
+	background: rgba(253, 253, 253, 1);
+	transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1), background 0.3s;
+}
+
+.main-view.mini {
+	transform: translate3d(0, 0, -500px);
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.main-view.dark {
+	background: rgba(15, 15, 15, 1);
+}
+
+.back-view {
+	position: absolute;
+	left: 0; top: 0;
+	height: 100%; width: 100%;
+	pointer-events: auto;
 }

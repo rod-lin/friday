@@ -14,13 +14,13 @@
 		// 	term.resize(cols, rows);
 		// }
 
-		function init(cwidth, cheight) {
+		function init() {
 			cont.children().remove();
 
-			var cols = Math.floor(cont.width() / cwidth);
-			var rows = Math.floor(cont.height() / cheight);
-
 			// alert([ cont.width(), cols, rows, cwidth ]);
+
+			var cols = 50;
+			var rows = 15;
 
 			term = new Terminal({
 				cursorBlink: true,
@@ -48,26 +48,29 @@
 
 			term.open(dom, true);
 
-			// cont.ready(function () {
-			// 	alert(term.charMeasure.width);
-			// 	// cwidth = cont.find(".xterm-rows").width() / cols;
-			// 	// cheight = cont.find(".xterm-rows").height() / rows;
-
-			// 	// cols = Math.floor(cont.width() / cwidth - 5);
-			// 	// rows = Math.floor(cont.height() / cheight - 5);
-
-			// 	// console.log([ cols, rows ]);
-
-			// 	// term.resize(54, 19);
-			// 	// // term.charMeasure.measure();
-			// });
-
 			fetch("http://" + base_url + "/term?cols=" + cols + "&rows=" + rows, { method: "POST" }).then(function (res) {
 				res.text().then(function (npid) {
 					pid = npid;
 					url += "/" + pid;
 					socket = new WebSocket(url);
 					socket.onopen = run;
+				});
+
+				cont.find(".xterm-rows").ready(function () {
+					// alert(term.charMeasure.width);
+					var cwidth = cont.find(".xterm-rows").width() / cols;
+					var cheight = cont.find(".xterm-rows").height() / rows;
+
+					cont.width(cols * cwidth);
+					cont.height(rows * cheight);
+
+					// cols = Math.floor(cont.width() / cwidth - 5);
+					// rows = Math.floor(cont.height() / cheight - 5);
+
+					// console.log([ cols, rows ]);
+
+					// term.resize(54, 19);
+					// // term.charMeasure.measure();
 				});
 			});
 		}
@@ -77,23 +80,15 @@
 			term._initialized = true;
 		}
 
-		var helper = $('<div class="terminal xterm xterm-theme-default xterm-cursor-blink" tabindex="0"><div class="xterm-helpers"><textarea class="xterm-helper-textarea" autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"></textarea><div class="composition-view"></div></div></div>');
-		cont.append(helper);
+		init();
 
-		var char = new CharMeasure(document, helper[0]);
-		char.measure();
+		if (config.onFocus) {
+			$(term.textarea).focus(config.onFocus);
+		}
 
-		setTimeout(function () {
-			init(char.width, char.height);
-
-			if (config.onFocus) {
-				$(term.textarea).focus(config.onFocus);
-			}
-
-			if (config.onBlur) {
-				$(term.textarea).blur(config.onBlur);
-			}
-		}, 0);
+		if (config.onBlur) {
+			$(term.textarea).blur(config.onBlur);
+		}
 
 		var ret = {};
 
