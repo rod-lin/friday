@@ -2900,7 +2900,7 @@ Terminal.prototype.eraseAttr = function () {
 Terminal.tangoColors = [
     '#2e3436',
     '#cc0000',
-    '#4e9a06',
+    '#0f0', // '#4e9a06',
     '#c4a000',
     '#3465a4',
     '#75507b',

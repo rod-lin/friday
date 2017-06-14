@@ -19,8 +19,8 @@
 
 			// alert([ cont.width(), cols, rows, cwidth ]);
 
-			var cols = 50;
-			var rows = 15;
+			var cols = 67;
+			var rows = 20;
 
 			term = new Terminal({
 				cursorBlink: true,
@@ -80,15 +80,17 @@
 			term._initialized = true;
 		}
 
-		init();
+		cont.ready(function () {
+			init();
 
-		if (config.onFocus) {
-			$(term.textarea).focus(config.onFocus);
-		}
+			if (config.onFocus) {
+				$(term.textarea).focus(config.onFocus);
+			}
 
-		if (config.onBlur) {
-			$(term.textarea).blur(config.onBlur);
-		}
+			if (config.onBlur) {
+				$(term.textarea).blur(config.onBlur);
+			}
+		});
 
 		var ret = {};
 
