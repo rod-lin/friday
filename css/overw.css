@@ -1,3 +1,10 @@
+@font-face {
+	font-family: Veneer;
+	src: url("/font/veneer.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
 	font-family: Veneer;
 	line-height: 1;
