@@ -15,10 +15,6 @@ body {
 	perspective: 1000px;
 }
 
-h1 {
-	font-size: 2.5em;
-}
-
 .bigger {
 	font-size: 120%;
 }

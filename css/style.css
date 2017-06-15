@@ -177,6 +177,8 @@ a:focus {
 	margin: 0;
 	opacity: 0;
 
+	pointer-events: none;
+
 	-webkit-transition: opacity 0.5s;
 	-moz-transition:    opacity 0.5s;
 	-ms-transition:     opacity 0.5s;
@@ -184,7 +186,7 @@ a:focus {
 	transition:         opacity 0.5s;
 }
 
-.impress-enabled .step.active { opacity: 1 }
+.impress-enabled .step.active { opacity: 1; pointer-events: auto; }
 
 /*
 	These 'slide' step styles were heavily inspired by HTML5 Slides:
