@@ -142,3 +142,7 @@ body {
 	opacity: 1;
 	pointer-events: auto;
 }
+
+.iblock {
+	display: inline-block;
+}
