@@ -659,7 +659,10 @@
 			init: init,
 			goto: goto,
 			next: next,
-			prev: prev
+			prev: prev,
+			refresh: function () {
+				goto(activeStep);
+			}
 		} );
 
 	};
@@ -771,7 +774,6 @@
 
 		// Delegated handler for clicking on the links to presentation steps
 		document.addEventListener( "click", function( event ) {
-
 			// Event delegation with "bubbling"
 			// Check if event target (or any of its parents is a link)
 			var target = event.target;
@@ -797,6 +799,8 @@
 
 		// Delegated handler for clicking on step elements
 		document.addEventListener( "click", function( event ) {
+			return; // no jump
+
 			var target = event.target;
 
 			// Find closest step element that is not active

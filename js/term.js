@@ -14,13 +14,13 @@
 		// 	term.resize(cols, rows);
 		// }
 
+		var cols = 67;
+		var rows = 20;
+
 		function init() {
 			cont.children().remove();
 
 			// alert([ cont.width(), cols, rows, cwidth ]);
-
-			var cols = 67;
-			var rows = 20;
 
 			term = new Terminal({
 				cursorBlink: true,
@@ -31,15 +31,15 @@
 				rows: rows
 			});
 
-			term.on("resize", function (size) {
-				if (!pid) return;
+			// term.on("resize", function (size) {
+			// 	if (!pid) return;
 
-				var cols = size.cols,
-					rows = size.rows,
-					url = "http://" + base_url + "/term/" + pid + "/size?cols=" + cols + "&rows=" + rows;
+			// 	var cols = size.cols,
+			// 		rows = size.rows,
+			// 		url = "http://" + base_url + "/term/" + pid + "/size?cols=" + cols + "&rows=" + rows;
 
-				fetch(url, { method: "POST" });
-			});
+			// 	fetch(url, { method: "POST" });
+			// });
 
 			var proto = (location.protocol === "https:") ? "wss://" : "ws://";
 			var url = proto + base_url + "/term";
@@ -55,27 +55,25 @@
 					socket = new WebSocket(url);
 					socket.onopen = run;
 				});
-
-				cont.find(".xterm-rows").ready(function () {
-					// alert(term.charMeasure.width);
-					var cwidth = cont.find(".xterm-rows").width() / cols;
-					var cheight = cont.find(".xterm-rows").height() / rows;
-
-					cont.width(cols * cwidth);
-					cont.height(rows * cheight);
-
-					// cols = Math.floor(cont.width() / cwidth - 5);
-					// rows = Math.floor(cont.height() / cheight - 5);
-
-					// console.log([ cols, rows ]);
-
-					// term.resize(54, 19);
-					// // term.charMeasure.measure();
-				});
 			});
 		}
 
 		function run() {
+			cont.find(".xterm-rows").ready(function () {
+				var cwidth = cont.find(".xterm-rows").width() / cols;
+				var cheight = cont.find(".xterm-rows").height() / rows;
+
+				// alert([ cols * cwidth, rows * cheight ]);
+
+				cont.width(cols * cwidth);
+				cont.height(rows * cheight);
+
+				cont.ready(function () {
+					if (config.onResize)
+						config.onResize();
+				});
+			});
+			
 			term.attach(socket);
 			term._initialized = true;
 		}
