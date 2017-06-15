@@ -59,6 +59,9 @@
 		}
 
 		function run() {
+			term.attach(socket);
+			term._initialized = true;
+			
 			cont.find(".xterm-rows").ready(function () {
 				var cwidth = cont.find(".xterm-rows").width() / cols;
 				var cheight = cont.find(".xterm-rows").height() / rows;
@@ -73,9 +76,6 @@
 						config.onResize();
 				});
 			});
-			
-			term.attach(socket);
-			term._initialized = true;
 		}
 
 		cont.ready(function () {
