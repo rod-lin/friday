@@ -175,7 +175,7 @@ a:focus {
 */
 .impress-enabled .step {
 	margin: 0;
-	opacity: 0;
+	opacity: 0.3;
 
 	pointer-events: none;
 
@@ -184,6 +184,11 @@ a:focus {
 	-ms-transition:     opacity 0.5s;
 	-o-transition:      opacity 0.5s;
 	transition:         opacity 0.5s;
+}
+
+.clear .step,
+.dark .step {
+	opacity: 0;
 }
 
 .impress-enabled .step.active { opacity: 1; pointer-events: auto; }

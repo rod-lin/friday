@@ -24,11 +24,12 @@
 		<div class="back-view"></div>
 		<div class="main-view">
 			<div id="impress">
-				<div class="centered step" style="font-size: 5em;" data-x="0" data-y="2000" data-scale="1"></div>
+				<div class="centered step clear" style="font-size: 5em;" data-x="0" data-y="2000" data-scale="1"></div>
 
-				<div class="centered step" style="font-size: 5em; line-height: 0.9;" data-x="0" data-y="1000" data-scale="1">
+				<div class="centered step clear" style="font-size: 5em; line-height: 0.9;" data-x="0" data-y="1000" data-scale="1">
 					<span style="font-size: 200%;"><span class="green">Hello</span>, </span><br>
-					<span style="display: inline-block; font-size: 200%; margin-top: 2rem;"><span class="blue">Dev</span>elopers <span class="red">A</span>ssociation</span></span>
+					<span style="display: inline-block; font-size: 200%; margin-top: 2rem;"><span class="blue">Dev</span>elopers<br>
+					<span class="red">A</span>ssociation</span></span>
 				</div>
 
 				<div class="centered step" style="font-size: 4.5em; margin-top: 2rem;" data-x="0" data-y="0" data-scale="1">
@@ -124,7 +125,7 @@
 				<!-- HIVE -->
 				<div class="centered step" data-x="9500" data-y="3500" data-z="-8000" data-rotate="540" data-scale="1">
 					<span style="font-size: 300%;"><span class="blue">Hive!</span> <span style="font-size: 50%;">by Tim 3A</span></span>
-					<span style="font-size: 270%; display: inline-block; margin-top: 2rem;">A brilliant <span class="blue">LAN</span> Chat Software</span>
+					<span style="font-size: 270%; display: inline-block; margin-top: 2rem;">A brilliant <span class="red">LAN</span> <span class="green">Chat</span> Software</span>
 				</div>
 
 				<div class="centered step wide dark" data-x="9500" data-y="2800" data-z="-8000" data-rotate="540" data-scale="1">
@@ -141,10 +142,10 @@
 
 				<!-- COMMUNITY -->
 				<div class="centered step" data-x="8000" data-y="1400" data-z="-8000" data-rotate="630" data-scale="1">
-					<span style="font-size: 270%;"><span class="blue">Community</span> <span style="font-size: 50%;">by Hisen 1A</span></span><br>
+					<span style="font-size: 270%;"><span class="blue shake-on-show">Community</span> <span style="font-size: 50%;">by Hisen 1A</span></span><br>
 					<span style="font-size: 130%; display: inline-block; margin-top: 2rem;">A utility app to fetch</span><br>
-					<span class="green" style="font-size: 200%;">greening rate</span><br>
-					<span style="font-size: 200%;">and <span class="blue">land area</span></span><br>
+					<span class="green shake-on-show" style="font-size: 200%;">greening rate</span><br>
+					<span style="font-size: 200%;">and <span class="red shake-on-show">land area</span></span><br>
 					<span style="font-size: 230%;">in Hangzhou</span>
 				</div>
 
@@ -195,21 +196,21 @@
 					<div id="term-3" class="term"></div>
 				</div>
 
-				<div class="centered step show-mini" data-x="15500" data-y="2000" data-z="-7000" data-rotate="900" data-scale="1">
+				<div class="centered step show-mini" data-x="15500" data-y="2000" data-z="-4000" data-rotate="900" data-scale="1">
 					<span style="font-size: 300%;">Impress Point</span><br>
 					<span style="font-size: 205%;">Based on <span class="blue">impress.js</span></span>
 				</div>
 
-				<div class="centered step hide-mini full" data-x="15500" data-y="2000" data-z="-6000" data-rotate="900" data-scale="1">
+				<div class="centered step hide-mini full" data-x="15500" data-y="2000" data-z="-2000" data-rotate="900" data-scale="1">
 					<span style="font-size: 220%;">All <span class="red">source code</span> at</span><br>
 					<span class="blue" style="font-size: 140%;"><span class="green">github.com</span>/friday-afternoon</span>
 				</div>
 
-				<div class="centered step" data-x="15500" data-y="2000" data-z="-5000" data-rotate="900" data-scale="1">
+				<div class="centered step clear" data-x="15500" data-y="2000" data-z="0" data-rotate="900" data-scale="1">
 					<span style="font-size: 300%;">Thank you!</span>
 				</div>
 
-				<div class="centered step dark" data-x="15500" data-y="2000" data-z="-5000" data-rotate="900" data-scale="1"></div>
+				<div class="centered step dark" data-x="15500" data-y="2000" data-z="0" data-rotate="900" data-scale="1"></div>
 			</div>
 
 			<iframe id="frame-1" class="frame" src="https://hisenzhang.github.io/Community/"></iframe>
@@ -253,6 +254,14 @@
 					$(".main-view").removeClass("dark");
 				});
 
+				$(".step.clear").on("impress:stepenterin", function () {
+					$(".main-view").addClass("clear");
+				})
+
+				$(".step.clear").on("impress:stepleave", function () {
+					$(".main-view").removeClass("clear");
+				});
+
 				$(".show-mini").on("impress:stepenterin", function () {
 					$(".main-view").addClass("mini");
 				});
@@ -263,6 +272,23 @@
 
 				$(".back-view").click(function () {
 					$(".main-view").removeClass("mini");
+				});
+
+				$(".blue, .green, .red").addClass("shake-on-show");
+
+				$(".shake-on-show").closest(".step").on("impress:stepenterin", function () {
+					var elem = $(this).find(".shake-on-show");
+
+					elem.each(function (n, e) {
+						$(e).css("animation-delay", (Math.random() * 0.6 + 0.3) + "s");
+						console.log(e);
+					});
+
+					elem.addClass("shake");
+				});
+
+				$(".shake-on-show").closest(".step").on("impress:stepleave", function () {
+					$(this).find(".shake-on-show").removeClass("shake");
 				});
 
 				var opt = {
